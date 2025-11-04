@@ -1,0 +1,90 @@
+name: Hugo build and deploy
+on:
+  schedule:
+    # 每天 UTC 00:00 重建站点
+    - cron: '0 0 * * *'
+  push:
+    branches: [ main ]
+    paths:
+      - 'assets/**'
+      - 'config/**'
+      - 'content/**'
+      - 'data/**'
+      - 'static/**'
+      - 'themes/**'
+      - 'go.mod'
+      - 'go.sum'
+  workflow_run:
+    workflows: ['Update theme']
+    types:
+      - completed
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          ssh-key: ${{ secrets.SYNC_CONTENT }}
+          submodules: true # 获取 Hugo 主题
+          fetch-depth: 0 # 用于 .GitInfo 和 .Lastmod
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Cache Hugo resources
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-hugo-resources
+        with:
+          path: resources
+          key: ${{ env.cache-name }}
+
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: "^1.20.0"
+
+      - name: Cache Go Modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ vars.HUGO_VERSION || 'latest' }}
+          extended: true
+
+      - name: Build site
+        env:
+          HUGO_PARAMS_GHTOKEN: ${{ secrets.HUGO_PARAMS_GHTOKEN }}
+        run: pnpm build
+
+      - name: Deploy to gghua.github.io
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          deploy_key: ${{ secrets.GP_DEPLOY_KEY }} # 需在仓库 secrets 中配置部署密钥
+          external_repository: GGHua/GGHua.github.io # 目标仓库
+          publish_branch: main # 目标分支
+          publish_dir: ./public # Hugo 构建产物目录
+          user_name: 'GitHub Actions[bot]'
+          user_email: '48508169+GGhua@users.noreply.github.com'
+          commit_message: ':rocket: Deploy from ${{ github.repository }} (${{ github.sha }})'
+          force_orphan: false
