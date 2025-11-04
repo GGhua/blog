@@ -1,0 +1,60 @@
+[author]
+  name = "GGhua"
+  email = "2895789672@qq.com"
+  link = "https://GGhua.github.io/"
+  avatar = "/images/avatar.jpg"
+
+[search]
+  enable = true                  # 是否启用搜索功能（true=启用，false=禁用）
+  type = "fuse"                  # 搜索引擎类型（二选一："fuse"=本地搜索，"algolia"=云端搜索）
+  contentLength = 4000           # 搜索索引的内容长度上限（单位：字符）
+  placeholder = ""               # 搜索框提示文字（默认空，可自定义如"搜索文章..."）
+  maxResultLength = 10           # 搜索结果的最大显示数量（默认10条，可按需调整）
+  snippetLength = 30             # 搜索结果中内容摘要的长度（默认30字符，避免摘要过长）
+  highlightTag = "em"            # 搜索结果中关键词高亮的 HTML 标签（默认<em>，即斜体高亮）
+  absoluteURL = false            # 搜索结果中的链接是否使用绝对 URL（false=相对 URL，更推荐）
+
+  # Algolia 云端搜索配置（示例中未启用，因 type 设为 "fuse"）
+  [search.algolia]
+    index = ""                   # Algolia 索引名称（需在 Algolia 控制台创建）
+    appID = ""                   # Algolia 应用 ID（从 Algolia 账号获取）
+    searchKey = ""               # Algolia 搜索密钥（需开启“可公开访问”权限）
+
+  # Fuse.js 本地搜索配置（核心，因 type 设为 "fuse"，该节点生效）
+  [search.fuse]
+    isCaseSensitive = false      # 是否区分大小写（默认 false，推荐保持，提升搜索体验）
+    minMatchCharLength = 2       # 最小匹配字符数（默认2，即输入≥2个字符才触发搜索，避免无效结果）
+    findAllMatches = false       # 是否查找所有匹配项（默认 false，找到部分匹配即返回，提升速度）
+    location = 0                 # 匹配位置权重（默认0，即优先匹配内容开头的关键词，如搜索“ Hugo”优先匹配标题开头含“Hugo”的文章）
+    threshold = 0.3              # 模糊匹配阈值（0=完全精确匹配，1=匹配所有内容，默认0.3，平衡精确性和灵活性）
+    distance = 100               # 匹配距离（默认100，控制关键词与“优先匹配位置”的允许距离，数值越大，允许关键词位置越灵活）
+    ignoreLocation = false       # 是否忽略匹配位置（默认 false，即仍按 location 配置优先匹配内容开头，设为 true 则不限制关键词位置）
+    useExtendedSearch = false    # 是否启用扩展搜索（默认 false，禁用 Unix 风格的搜索语法，如“AND/OR”“引号精确匹配”，适合普通用户）
+    ignoreFieldNorm = false      # 是否忽略字段长度权重（默认 false，即内容越短的字段，关键词匹配时得分越高，适合优先显示短标题/标签匹配的结果）
+
+# Home page config
+[home]
+  # Home page profile
+  [home.profile]
+    enable = true
+    # Gravatar Email for preferred avatar in home page
+    gravatarEmail = ""
+    # URL of avatar shown in home page
+    avatarURL = "/images/avatar.jpg"
+    # FixIt 0.2.17 | NEW identifier of avatar menu link
+    avatarMenu = "about"
+    # title shown in home page (HTML format is supported)
+    title = "铭"
+    # subtitle shown in home page (HTML format is supported)
+    subtitle = "各有渡口，各自归舟"
+    # whether to use typeit animation for subtitle
+    typeit = true
+    # whether to show social links
+    social = false
+    # disclaimer (HTML format is supported)
+    disclaimer = "<img src='https://ghchart.rshah.org/GGhua' alt=\"GGhua's GitHub chart\">"
+  # Home page posts
+  [home.posts]
+    enable = true
+    # special amount of posts in each home posts page
+    paginate = 5

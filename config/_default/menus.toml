@@ -1,0 +1,52 @@
+# -------------------------------------------------------------------------------------
+# Menu Configuration
+# See: https://fixit.lruihao.cn/documentation/basics/#menu-configuration
+# -------------------------------------------------------------------------------------
+
+[[main]]
+  identifier = "archives"
+  name = "文章"
+  url = "/archives/"
+  weight = 10
+  parent = ""
+  pre = ""
+  post = ""
+  title = ""
+  [main.params]
+    icon = "fa-solid fa-file-lines fa-fw"
+
+[[main]]
+  identifier = "categories"
+  name = "分类"
+  url = "/categories/"
+  weight = 20
+  parent = ""
+  pre = ""
+  post = ""
+  title = ""
+  [main.params]
+    icon = "fa-solid fa-folder fa-fw"
+
+[[main]]
+  identifier = "tags"
+  name = "标签"
+  url = "/tags/"
+  weight = 30
+  parent = ""
+  pre = ""
+  post = ""
+  title = ""
+  [main.params]
+    icon = "fa-solid fa-tag fa-fw"
+
+[[main]]
+  identifier = "about"
+  name = "关于"
+  url = "/about/"
+  weight = 40
+  parent = ""
+  pre = ""
+  post = ""
+  title = ""
+  [main.params]
+    icon = "fa-solid fa-user fa-fw"

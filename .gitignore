@@ -1,0 +1,8 @@
+/.idea
+*.iml
+
+/public
+
+
+/content/draft/
+.hugo_build.lock

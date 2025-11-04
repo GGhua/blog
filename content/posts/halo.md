@@ -1,0 +1,51 @@
+---
+title: "Halo的部署安装"
+date: 2025-05-20T12:21:39+08:00
+draft: false
+categories: ["折腾"]
+tags: ["Halo"]
+author:
+  name: "GGhua"
+---
+[使用 Docker Compose 部署 | Halo 文档](https://docs.halo.run/getting-started/install/docker-compose/?current=external-db)
+
+mkdir ~/halo && cd ~/halo
+
+docker-compase安装
+
+~/halo/docker-compose.yaml
+
+```yml
+version: "3"
+
+services:
+  halo:
+    image: registry.fit2cloud.com/halo/halo:2.19
+    restart: on-failure:3
+    network_mode: "host"
+    volumes:
+      - ./halo2:/root/.halo2
+    command:
+      # 修改为自己已有的 MySQL 配置
+      - --spring.r2dbc.url=r2dbc:pool:mysql://172.21.80.1:3307/halo
+      - --spring.r2dbc.username=root
+      - --spring.r2dbc.password=Hxl@121314
+      - --spring.sql.init.platform=mysql
+      # 外部访问地址，请根据实际需要修改
+      - --halo.external-url=http://localhost:8090/
+      # 端口号 默认8090
+      - --server.port=8090
+```
+
+docker-compose up -d
+
+docker-compose logs -f
+
+
+
+docker安装
+
+``` sh
+docker run -it -d --name halo -p 8090:8090 -v ~/.halo2:/root/.halo2 registry.fit2cloud.com/halo/halo:2.19
+```
+

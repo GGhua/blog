@@ -1,0 +1,14 @@
+# -------------------------------------------------------------------------------------
+# 站点基础配置
+# See: https://gohugo.io/getting-started/configuration/
+# -------------------------------------------------------------------------------------
+
+title = "Blog"
+baseURL = "https://GGhua.github.io/"  # 部署后实际域名
+theme = "FixIt"  # 必须与 themes 目录下的文件夹名一致（区分大小写）
+defaultContentLanguage = "zh-cn"  # 设置默认语言
+languageCode = "zh-CN"
+timeZone = "Asia/Shanghai"
+hasCJKLanguage = true  # 启用中文等 CJK 语言优化（避免标点挤压）
+enableRobotsTXT = false  # 初期测试关闭，部署后改为 true
+enableGitInfo = false  # 解决之前的 Git 日志错误（初始化 Git 后可改为 true）
