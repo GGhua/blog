@@ -75,10 +75,7 @@ jobs:
       - name: Build site
         env:
           HUGO_PARAMS_GHTOKEN: ${{ secrets.HUGO_PARAMS_GHTOKEN }}
-        run: |
-          pnpm build
-          # 在 public 目录（构建产物）中添加 .nojekyll
-          touch ./public/.nojekyll  # 关键：生成 .nojekyll 文件
+        run: pnpm build
 
       - name: Deploy to gghua.github.io
         uses: peaceiris/actions-gh-pages@v4
