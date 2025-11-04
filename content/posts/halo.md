@@ -8,13 +8,13 @@ author:
   name: "GGhua"
 ---
 [使用 Docker Compose 部署 | Halo 文档](https://docs.halo.run/getting-started/install/docker-compose/?current=external-db)
-
+```shell
 mkdir ~/halo && cd ~/halo
-
-docker-compase安装
-
+```
+docker-compase安装halo
+```shell
 ~/halo/docker-compose.yaml
-
+```
 ```yml
 version: "3"
 
@@ -36,16 +36,14 @@ services:
       # 端口号 默认8090
       - --server.port=8090
 ```
+启动服务
 ```shell
 docker-compose up -d
-
+# 查看日志
 docker-compose logs -f
 ```
 
-
-
-docker安装halo
-
+Docker CLI安装 halo
 ``` sh
 docker run -it -d --name halo -p 8090:8090 -v ~/.halo2:/root/.halo2 registry.fit2cloud.com/halo/halo:2.19
 ```
