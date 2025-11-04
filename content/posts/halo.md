@@ -36,10 +36,11 @@ services:
       # 端口号 默认8090
       - --server.port=8090
 ```
-
+```shell
 docker-compose up -d
 
 docker-compose logs -f
+```
 
 
 
