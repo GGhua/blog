@@ -43,7 +43,7 @@ docker-compose logs -f
 
 
 
-docker安装
+docker安装halo
 
 ``` sh
 docker run -it -d --name halo -p 8090:8090 -v ~/.halo2:/root/.halo2 registry.fit2cloud.com/halo/halo:2.19
