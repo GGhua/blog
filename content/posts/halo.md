@@ -1,20 +1,28 @@
 ---
-title: "Halo的部署安装"
-date: 2025-05-20T12:21:39+08:00
-draft: false
-categories: ["折腾"]
-tags: ["Halo"]
+abbrlink: ''
 author:
-  name: "GGhua"
+  name: GGhua
+categories:
+- 折腾
+date: '2025-05-20T12:21:39+08:00'
+draft: false
+tags:
+- Halo
+title: Halo的部署安装
+updated: '2025-11-15T15:11:49.451+08:00'
 ---
 [使用 Docker Compose 部署 | Halo 文档](https://docs.halo.run/getting-started/install/docker-compose/?current=external-db)
+
 ```shell
 mkdir ~/halo && cd ~/halo
 ```
+
 docker-compase安装halo
+
 ```shell
 ~/halo/docker-compose.yaml
 ```
+
 ```yml
 version: "3"
 
@@ -36,7 +44,9 @@ services:
       # 端口号 默认8090
       - --server.port=8090
 ```
+
 启动服务
+
 ```shell
 docker-compose up -d
 # 查看日志
@@ -44,7 +54,7 @@ docker-compose logs -f
 ```
 
 Docker CLI安装 halo
-``` sh
+
+```sh
 docker run -it -d --name halo -p 8090:8090 -v ~/.halo2:/root/.halo2 registry.fit2cloud.com/halo/halo:2.19
 ```
-
