@@ -11,6 +11,10 @@ on:
 jobs:
   Update-FixIt:
     runs-on: ubuntu-latest
+    permissions:
+      #允许 push 到仓库
+      contents: write
+
     steps:
       - name: Check out repository code
         uses: actions/checkout@v6
