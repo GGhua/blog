@@ -21,6 +21,11 @@ jobs:
         with:
           submodules: true
           fetch-depth: 0
+      
+      - name: Configure Git
+        run: |
+          git config --global user.name "GGhua"
+          git config --global user.email "48508169+GGhua@users.noreply.github.com"
 
       - name: Update theme
         run: git submodule update --remote --merge themes/FixIt
