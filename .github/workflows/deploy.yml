@@ -67,7 +67,7 @@ jobs:
           publish_dir: ./public # Hugo 构建产物目录
           user_name: 'Cell[bot]'
           user_email: '48508169+GGhua@users.noreply.github.com'
-          commit_message: ':rocket: Deploy from ${{ github.repository }}'
+          commit_message: ':rocket:'
           # commit_message: ':rocket: Deploy from ${{ github.repository }} (${{ github.sha }})'
           force_orphan: false
 
