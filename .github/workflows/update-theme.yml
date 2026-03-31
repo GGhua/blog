@@ -19,16 +19,22 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v6
         with:
-          submodules: true
+          submodules: false
           fetch-depth: 0
       
       - name: Configure Git
         run: |
           git config --global user.name "GGhua"
           git config --global user.email "48508169+GGhua@users.noreply.github.com"
-
-      - name: Update theme
-        run: git submodule update --remote --merge themes/FixIt
+          
+      # 强制重置并更新子模块（自动修复坏 commit）
+      - name: Reset & update FixIt theme
+        run: |
+          git submodule deinit -f themes/FixIt
+          rm -rf .git/modules/themes/FixIt
+          git submodule update --init --remote --merge themes/FixIt
+      # - name: Update theme
+      #   run: git submodule update --remote --merge themes/FixIt
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v7
